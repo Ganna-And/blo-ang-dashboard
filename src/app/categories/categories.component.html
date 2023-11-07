@@ -1,0 +1,78 @@
+<div class="container light_theme px-4">
+  <div class="row">
+    <div class="col-md-12 my-4">
+      <h1 class="text-center">{{ statusCategory }} Category form</h1>
+      <p class="text-center col-md-12">
+        You can {{ statusCategory }} new category here..
+      </p>
+      <form
+        class="form-inline d-flex"
+        #categoryForm="ngForm"
+        (ngSubmit)="onSubmit(categoryForm)"
+      >
+        <div class="form-group col-md-9">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="add category title"
+            name="category"
+            ngModel
+            #newCategory="ngModel"
+            [(ngModel)]="formCategory"
+            [ngClass]="{
+              'is-invalid': newCategory.touched && newCategory.invalid
+            }"
+            required=""
+          />
+
+          <div
+            class="alert alert-danger col-md-12 text-center"
+            *ngIf="newCategory.touched && newCategory.invalid"
+          >
+            Category field is required
+          </div>
+        </div>
+        <div class="col-md-3">
+          <button class="btn-sub btn-block" [disabled]="categoryForm.invalid">
+            {{ statusCategory }} category
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="row mt-6 mb-3">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+      <table class="table row-border hover">
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Category</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let category of categoryArray; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ category.data.category }}</td>
+            <td>
+              <button
+                class="btn btn-warning btn-sm"
+                (click)="onEdit(category.data.category, category.id)"
+              >
+                <b>Edit</b>
+              </button>
+              <button
+                class="btn btn-danger btn-sm ml-2"
+                (click)="onDelete(category.id)"
+              >
+                <b>Delete</b>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-3"></div>
+  </div>
+</div>

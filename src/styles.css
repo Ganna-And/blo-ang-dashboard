@@ -1,1 +1,169 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Karantina:wght@700&family=Kodchasan:wght@400;700&display=swap');
+@import "~bootstrap-icons/font/bootstrap-icons";
+@import '~ngx-toastr/toastr';
+
+:root {
+    --prim: #B5AE04;
+    --bg: #1C1B01;
+    --txt: #F8F7E8;
+    --txt-sec: #E8F0F8;
+    --secon: #792525;
+}
+
+.dark_border_b {
+    border-bottom: 1px solid var(--bg);
+}
+
+.light_border_b {
+    border-bottom: 1px solid var(--txt);
+}
+
+.light_border {
+    border: 1px solid var(--txt);
+}
+
+.dark_border {
+    border: 1px solid var(--txt);
+}
+
+li {
+    list-style-type: none;
+}
+
+ul {
+    padding: 0;
+}
+
+.ordered_li {
+    list-style-type: upper-alpha;
+}
+
+h1 {
+    text-transform: uppercase;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Karantina', sans-serif;
+}
+
+p {
+    font-family: 'Kodchasan', sans-serif;
+}
+
+body {
+    font-family: 'Karantina', sans-serif;
+    background-color: var(--bg) !important;
+    color: var(--txt) !important;
+    min-height: 100vh;
+}
+
+a {
+    color: var(--txt) !important;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none !important;
+}
+
+
+
+.form-control {
+    border: 1px solid var(--bg);
+
+}
+
+input {
+    width: 100% !important;
+    margin-top: 1rem !important;
+}
+
+input[type=text] {
+    width: 100% !important;
+}
+
+button:disabled {
+    color: rgb(58, 57, 57) !important;
+    background-color: #1C1B01;
+}
+
+button:disabled:hover {
+    color: rgb(58, 57, 57) !important;
+    background-color: #1C1B01;
+}
+
+input:focus,
+textarea:focus {
+    border: 1px solid var(--bg) !important;
+    box-shadow: 3px 3px 8px rgba(23, 22, 1, 0.5) !important;
+    background-color: var(--txt);
+}
+
+.btn-sub {
+    background-color: var(--bg);
+    color: var(--txt);
+    border-radius: 10px;
+    transition: 0.4s ease;
+    text-transform: uppercase;
+    padding-inline: 1rem;
+    font-weight: 500;
+    font-size: 14px;
+    margin-top: 1rem;
+}
+
+.btn-prim-lg {
+    background-color: var(--prim);
+    color: var(--bg);
+    border-radius: 10px;
+    transition: 0.4s ease;
+    text-transform: uppercase;
+    padding-inline: 1rem;
+    font-weight: 500;
+    font-size: 16px;
+    margin-top: 1rem;
+
+}
+
+.btn-prim-lg:hover {
+    background-color: var(--bg);
+    color: var(--prim);
+
+}
+
+
+
+p {
+    text-align: center;
+    text-wrap: balance;
+}
+
+.btn-sub:hover {
+    background-color: var(--prim);
+    color: var(--bg);
+
+}
+
+.dark_theme {
+    background-color: var(--bg);
+    color: var(--txt);
+}
+
+.light_theme {
+    background-color: var(--txt);
+    color: var(--bg);
+}
+
+.prim_theme {
+    background-color: var(--prim);
+    color: var(--bg);
+}
+
+.border_dark {
+    border: 1px solid var(--bg);
+}

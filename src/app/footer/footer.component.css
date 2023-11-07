@@ -1,0 +1,13 @@
+.footer_logo {
+    font-size: clamp(42px, 10vw, 70px);
+    font-family: 'Karantina', san-serif;
+    letter-spacing: clamp(0.2em, 3vw, 1em);
+
+}
+
+.list-nav {
+    width: clamp(300px, 80%, 600px);
+    justify-content: space-between;
+
+
+}
