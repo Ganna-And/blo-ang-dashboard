@@ -23,9 +23,14 @@
               "zone.js"
             ],
             "tsConfig": "tsconfig.app.json",
-            "assets": [
+            "assets": [ {
+                "glob": "**/*",
+                "input": "./node_modules/@kolkov/angular-editor/assets/",
+                "output": "./assets/fonts/"
+              },
               "src/favicon.ico",
               "src/assets"
+             
             ],
             "styles": [
               "src/styles.css",

@@ -6,33 +6,35 @@
         You can {{ statusCategory }} new category here..
       </p>
       <form
-        class="form-inline d-flex"
+        class="form-inline d-flex justify-content-center"
         #categoryForm="ngForm"
         (ngSubmit)="onSubmit(categoryForm)"
       >
-        <div class="form-group col-md-9">
-          <input
-            type="text"
-            class="form-control"
-            placeholder="add category title"
-            name="category"
-            ngModel
-            #newCategory="ngModel"
-            [(ngModel)]="formCategory"
-            [ngClass]="{
-              'is-invalid': newCategory.touched && newCategory.invalid
-            }"
-            required=""
-          />
+        <div class="col-md-8">
+          <div class="form-group mt-4">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="add category title"
+              name="category"
+              ngModel
+              #newCategory="ngModel"
+              [(ngModel)]="formCategory"
+              [ngClass]="{
+                'is-invalid': newCategory.touched && newCategory.invalid
+              }"
+              required=""
+            />
 
-          <div
-            class="alert alert-danger col-md-12 text-center"
-            *ngIf="newCategory.touched && newCategory.invalid"
-          >
-            Category field is required
+            <div
+              class="alert alert-danger col-md-12 text-center"
+              *ngIf="newCategory.touched && newCategory.invalid"
+            >
+              Category field is required
+            </div>
           </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-4">
           <button class="btn-sub btn-block" [disabled]="categoryForm.invalid">
             {{ statusCategory }} category
           </button>

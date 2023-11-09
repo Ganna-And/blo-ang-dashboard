@@ -3,6 +3,8 @@
 @import "~bootstrap-icons/font/bootstrap-icons";
 @import '~ngx-toastr/toastr';
 
+
+
 :root {
     --prim: #B5AE04;
     --bg: #1C1B01;
@@ -74,35 +76,50 @@ a:hover {
 
 
 
+input[type=text],
+textarea[type=text] {
+    padding-left: 1rem;
+}
+
+input[type=file] {
+    padding: 4px;
+}
+
 .form-control {
-    border: 1px solid var(--bg);
-
+    border: 1px solid var(--bg) !important;
+    background-color: var(--txt) !important;
 }
 
-input {
+input,
+textarea {
     width: 100% !important;
-    margin-top: 1rem !important;
+    background-color: var(--txt);
+    border: 1px solid black;
+    margin: 0;
+    padding: 0;
 }
 
-input[type=text] {
-    width: 100% !important;
-}
+
 
 button:disabled {
-    color: rgb(58, 57, 57) !important;
+    color: rgb(92, 91, 91) !important;
     background-color: #1C1B01;
 }
 
 button:disabled:hover {
-    color: rgb(58, 57, 57) !important;
+    color: rgb(92, 91, 91) !important;
     background-color: #1C1B01;
 }
 
 input:focus,
 textarea:focus {
-    border: 1px solid var(--bg) !important;
+
     box-shadow: 3px 3px 8px rgba(23, 22, 1, 0.5) !important;
     background-color: var(--txt);
+}
+
+.form-group {
+    margin: 4px !important;
 }
 
 .btn-sub {
@@ -113,8 +130,12 @@ textarea:focus {
     text-transform: uppercase;
     padding-inline: 1rem;
     font-weight: 500;
-    font-size: 14px;
+    font-size: 16px;
     margin-top: 1rem;
+}
+
+.row {
+    box-sizing: border-box;
 }
 
 .btn-prim-lg {

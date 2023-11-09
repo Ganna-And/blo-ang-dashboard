@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AngularFireModule } from '@angular/fire/compat';
-import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
-import {FormsModule} from'@angular/forms'
+import {  AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import {FormsModule, ReactiveFormsModule} from'@angular/forms'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,6 +15,9 @@ import{ToastrModule} from'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AllPostComponent } from './posts/all-post/all-post.component';
 import { NewPostComponent } from './posts/new-post/new-post.component';
+import {AngularEditorModule} from'@kolkov/angular-editor'
+import { HttpClientModule} from '@angular/common/http';
+import{AngularFireStorageModule} from '@angular/fire/compat/storage'
 
 @NgModule({
   declarations: [
@@ -33,7 +36,11 @@ import { NewPostComponent } from './posts/new-post/new-post.component';
     AngularFirestoreModule,
     FormsModule,
     ToastrModule.forRoot(),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    AngularEditorModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    AngularFireStorageModule
   
     
   ],
