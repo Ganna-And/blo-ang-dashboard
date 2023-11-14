@@ -23,4 +23,15 @@ export class AllPostComponent  {
     })
   }
 
+  onDelete(imgPost:string, id:string ){
+this.postService.deleteImg(imgPost,id)
+  }
+
+  onFeatured(id:any, value:any){
+const featuredData={
+  isFeatured: value
+}
+
+this.postService.updateFeturedStatus(id,featuredData)
+  }
 }

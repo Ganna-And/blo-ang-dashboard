@@ -15,43 +15,68 @@
   </div>
   <div class="row">
     <div class="col-md-12 light_theme mt-4">
-      <table class="table row-border hover">
-        <thead>
-          <tr>
-            <th>N0</th>
-            <th>Title</th>
-            <th>Excerpt</th>
-            <th>Category</th>
-            <th>Post Img</th>
-            <th>Content</th>
-            <th>Date</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let post of postArray; let i = index">
-            <td [width]="10">{{ i + 1 }}</td>
-            <td [width]="200">{{ post.data.title }}</td>
-            <td [width]="300">{{ post.data.excerpt }}</td>
-            <td>{{ post.data.category.category }}</td>
-            <td [width]="200">
-              <img
-                src="{{ post.data.pathPostImg }}"
-                alt="post image"
-                class="img img-fluid"
-              />
-            </td>
-            <td>{{ post.data.createdAt.toMillis() | date }}</td>
-            <button
-              class="btn btn-sm btn-warning"
-              routerLink="/post/new"
-              [queryParams]="{ id: post.id }"
-            >
-              EDIT
-            </button>
-          </tr>
-        </tbody>
-      </table>
+      <div class="table-responsive">
+        <table class="table row-border hover">
+          <thead>
+            <tr>
+              <th>N0</th>
+              <th>Post Img</th>
+              <th>Title</th>
+              <th>Category</th>
+              <th>Date</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let post of postArray; let i = index">
+              <td [width]="10">{{ i + 1 }}</td>
+              <td>{{ post.data.isFeatured }}</td>
+              <td [width]="200">
+                <img
+                  src="{{ post.data.pathPostImg }}"
+                  alt="post image"
+                  class="img img-fluid"
+                />
+              </td>
+              <td [width]="200">{{ post.data.title }}</td>
+              <td>{{ post.data.category.category }}</td>
+              <td>{{ post.data.createdAt.toMillis() | date }}</td>
+              <td>
+                <button
+                  class="btn btn-warning ml-2 mb-1"
+                  routerLink="/post/new"
+                  [queryParams]="{ id: post.id }"
+                >
+                  Edit
+                </button>
+
+                <button
+                  class="btn btn-danger ml-2 mb-1"
+                  (click)="onDelete(post.data.pathPostImg, post.id)"
+                >
+                  Delete
+                </button>
+
+                <button
+                  *ngIf="post?.data?.isFeatured == false"
+                  class="btn btn-success ml-2 mb-1"
+                  (click)="onFeatured(post.id, true)"
+                >
+                  Mark as Featured
+                </button>
+
+                <button
+                  *ngIf="post?.data?.isFeatured == true"
+                  class="btn btn-primary ml-2"
+                  (click)="onFeatured(post.id, false)"
+                >
+                  Featured
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>

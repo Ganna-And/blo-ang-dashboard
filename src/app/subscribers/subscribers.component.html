@@ -1,0 +1,46 @@
+<div class="container container-sm-fluid">
+  <h2 class="text-center text-uppercase mt-4 pt-4">All Subscribers</h2>
+  <p>You can manage your subscribers from here...</p>
+
+  <div class="d-flex justify-content-center align-items-center">
+    <button class="btn-prim-lg ml-2" routerLink="/">
+      Back to dashboard<i class="fas fa-sign-out-alt ml-1"></i>
+    </button>
+  </div>
+  <div class="row">
+    <div class="col-md-12 light_theme mt-4">
+      <div class="table-responsive">
+        <table class="table row-border hover">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let subscriber of subArray">
+              <!-- <td>{{ index + 1 }}</td> -->
+              <td>{{ subscriber.data.name }}</td>
+              <td class="text-truncate">{{ subscriber.data.email }}</td>
+              <td>
+                <button
+                  class="btn btn-warning d-md-inline-block d-none"
+                  (click)="onDelete(subscriber.id)"
+                >
+                  Delete
+                </button>
+                <button
+                  class="btn btn-warning d-md-none"
+                  (click)="onDelete(subscriber.id)"
+                >
+                  <i class="fas fa-times"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

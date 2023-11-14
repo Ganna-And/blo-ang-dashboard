@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Post } from 'src/app/models/post';
 import { CategoryServiceService } from 'src/app/services/category-service.service';
 import { PostService } from 'src/app/services/post.service';
 import { ActivatedRoute } from '@angular/router';
+
 
 
 @Component({
@@ -19,38 +20,36 @@ permalink:string ='';
 selectedImage:any;
 categories?:Array<any>;
 post: any;
-postForm!: FormGroup;
+postForm: FormGroup | undefined ;
 formStatus: string ='add new';
 docId:string=''
 
 
  constructor(private categoryService: CategoryServiceService, 
-  private fc:FormBuilder, private postService:PostService,
+  private fb:FormBuilder,
+  private postService:PostService,
   private route: ActivatedRoute){
  this.categoryService.loadData().subscribe(val=>{
       this.categories = val
-    });
-this.route.queryParams.subscribe(val=>{
+      this.route.queryParams.subscribe(val=>{
   this.docId = val['id'];
-  this.postService.loadOneData(val['id']).subscribe(post=>{
+
+if(this.docId){
+ this.postService.loadOneData(val['id']).subscribe(post=>{
     this.post = post;
-    console.log(post)
-    this.postForm = this.fc.group({
-  title:[this.post.title, [Validators.required, Validators.minLength(6)]],
-  permalink:[this.post.permalink, Validators.required],
-  excerpt:[this.post.excerpt, [Validators.required,Validators.minLength(30)]],
-  category:[`${this.post.category.categoryId}-${this.post.category.category}`, Validators.required],
-  content:[this.post.content,Validators.required],
+    this.postForm = this.fb.group({
+  title:[this.post?.title, [Validators.required, Validators.minLength(6)]],
+  permalink:[this.post?.permalink, Validators.required],
+  excerpt:[this.post?.excerpt, [Validators.required,Validators.minLength(30)]],
+  category:[`${this.post?.category?.categoryId}-${this.post?.category?.category}`, Validators.required],
+  content:[this.post?.content,Validators.required],
     })
-    this.imgSrc = this.post.pathPostImg
-    this.formStatus='edit'
-  })
-  
-})
-
-
-
-this.postForm =this.fc.group({
+    this.imgSrc = this.post?.pathPostImg
+    this.formStatus ='edit'
+  }
+  ) 
+}else{
+  this.postForm =this.fb.group({
   title:['', [Validators.required, Validators.minLength(6)]],
   permalink:['', Validators.required],
   excerpt:['', [Validators.required,Validators.minLength(30)]],
@@ -58,14 +57,29 @@ this.postForm =this.fc.group({
   imgSrc:['', Validators.required],
   content:['',Validators.required],
 })
+this.formStatus = 'add new' }
+
+  
+})
+
+    });
+
+
+   
+  
+
+
+
 
   }
 
   
 
  get f_c(){
-  return this.postForm.controls
+  return this.postForm?.controls
  }
+
+ 
   onTitleChange(event:any ){
 const title = event.target.value;
 this.permalink = title.replace(/\s/g,'-')
@@ -86,16 +100,16 @@ this.permalink = title.replace(/\s/g,'-')
   }
 
   onSubmit(){
-    const splitted = this.postForm.value.category.split('-')
+    const splitted = this.postForm?.value.category.split('-')
     const post: Post = {
-title:this.postForm.value.title,
-permalink:this.postForm.value.permalink,
-excerpt:this.postForm.value.excerpt,
+title:this.postForm?.value.title,
+permalink:this.postForm?.value.permalink,
+excerpt:this.postForm?.value.excerpt,
 category:{
     categoryId: splitted[0],
     category:splitted[1]
 },
-content: this.postForm.value.content,
+content: this.postForm?.value.content,
 pathPostImg: '',
 isFeatured: false,
 views: 0,
@@ -105,7 +119,7 @@ createdAt: new Date
     
     console.log(post);
     this.postService.onPostSubmit(this.selectedImage,post, this.formStatus,this.docId);
-    this.postForm.reset()
+    this.postForm?.reset()
     this.imgSrc = './assets/placeholder-image.jpg';
     
   }

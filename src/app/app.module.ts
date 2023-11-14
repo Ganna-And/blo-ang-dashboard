@@ -17,7 +17,11 @@ import { AllPostComponent } from './posts/all-post/all-post.component';
 import { NewPostComponent } from './posts/new-post/new-post.component';
 import {AngularEditorModule} from'@kolkov/angular-editor'
 import { HttpClientModule} from '@angular/common/http';
-import{AngularFireStorageModule} from '@angular/fire/compat/storage'
+import{AngularFireStorageModule} from '@angular/fire/compat/storage';
+import { LoginComponent } from './auth/login/login.component'
+import {AngularFireAuthModule} from'@angular/fire/compat/auth';
+import { SubscribersComponent } from './subscribers/subscribers.component'
+
 
 @NgModule({
   declarations: [
@@ -27,7 +31,9 @@ import{AngularFireStorageModule} from '@angular/fire/compat/storage'
     DashboardComponent,
     CategoriesComponent,
     AllPostComponent,
-    NewPostComponent
+    NewPostComponent,
+    LoginComponent,
+    SubscribersComponent
   ],
   imports: [
     BrowserModule,  
@@ -40,7 +46,9 @@ import{AngularFireStorageModule} from '@angular/fire/compat/storage'
     AngularEditorModule,
     HttpClientModule,
     ReactiveFormsModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    AngularFireAuthModule
+    
   
     
   ],

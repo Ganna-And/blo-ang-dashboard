@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { Router } from '@angular/router';
+import { error } from 'console';
 import { ToastrService } from 'ngx-toastr';
 import { map } from 'rxjs';
 
@@ -23,12 +24,14 @@ const filePath =  `pathIMG/${Date.now()}`
 
  this.storage.upload(filePath, selectedImage).then(()=>{
   console.log('data uploaded sucsessfuly');
+
   this.storage.ref(filePath).getDownloadURL().subscribe(URL=>{
   postData.pathPostImg = URL;
   console.log(postData);
+
   if(formStatus=='edit'){
   this.updateData(docId,postData);
-  }else if(formStatus=='add new'){
+  }else {
   this.saveData(postData)}
 })
  })
@@ -38,7 +41,8 @@ const filePath =  `pathIMG/${Date.now()}`
 
  saveData(postData:any){
   this.afc.collection('post').add(postData).then(docRef=>{
-    this.toastr.success('Data uploaded sucsesfully')
+    this.toastr.success('Data uploaded sucsesfully');
+    this.router.navigate(['/posts'])
   })
  }
 
@@ -52,15 +56,34 @@ const filePath =  `pathIMG/${Date.now()}`
   }))
 }
 
-loadOneData(id:string){
+loadOneData(id:any){
 return this.afc.doc(`post/${id}`).valueChanges();
 }
  
-updateData(id:string, postData:any){
+updateData(id:any, postData:any){
 this.afc.doc(`post/${id}`).update(postData).then(()=>{
   this.toastr.success('Data updated sucsessfuly!');
-  this.router.navigate(['/posts'])
-  
+  this.router.navigate(['/posts']) 
 })
+}
+
+deleteImg(img:any, id:string){
+  this.storage.storage.refFromURL(img).delete().then(()=>{
+   this.deleteData(id)
+  }).catch(error=> this.toastr.error(`${error.message}`)
+  )
+}
+
+deleteData(id:string){
+  this.afc.doc(`post/${id}`).delete().then(()=>{
+    this.toastr.warning('Post is removed')
+  })
+}
+
+updateFeturedStatus(id:string, featuredData:any){
+
+  this.afc.doc(`post/${id}`).update(featuredData).then(()=>{
+    this.toastr.info('Fetured status updated')
+  })
 }
 }
